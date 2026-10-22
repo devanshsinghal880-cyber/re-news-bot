@@ -2,7 +2,7 @@ import json, os
 from datetime import datetime, timezone
 from google import genai
 
-MODEL = "gemini-2.5-flash"
+MODEL = "gemini-3.8-flash"
 CATEGORIES = ["Residential", "Commercial", "Policy", "Finance", "Infra"]
 
 with open("data/raw.json", encoding="utf-8") as f:
