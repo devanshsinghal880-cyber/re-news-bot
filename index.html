@@ -1,0 +1,44 @@
+<h2>Real Estate News</h2>
+<div id="re-news-list">Loading...</div>
+<script>
+  const css = document.createElement("style");
+css.textContent = `
+  body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 16px; }
+  #re-news-list { display: grid; gap: 16px; }
+  .re-card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; }
+  .re-card h3 { margin: 0 0 8px; font-size: 18px; }
+  .re-card p { margin: 0 0 8px; color: #444; }
+  .re-meta { font-size: 13px; color: #777; }
+`;
+document.head.appendChild(css);
+
+const NEWS_URL = "https://raw.githubusercontent.com/devanshsinghal880-cyber/re-news-bot/main/data/news.json";
+
+fetch(NEWS_URL)
+  .then(res => res.json())
+  .then(data => {
+    const list = document.getElementById("re-news-list");
+    list.innerHTML = "";
+    data.items.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "re-card";
+      const title = document.createElement("h3");
+      const link = document.createElement("a");
+      link.href = item.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = item.title;
+      title.appendChild(link);
+      const summary = document.createElement("p");
+      summary.textContent = item.summary;
+      const meta = document.createElement("div");
+      meta.className = "re-meta";
+      meta.textContent = `${item.category} · ${item.source}`;
+      card.append(title, summary, meta);
+      list.appendChild(card);
+    });
+  })
+  .catch(() => {
+    document.getElementById("re-news-list").textContent = "News abhi load nahi ho payi.";
+    </script>
+  });
